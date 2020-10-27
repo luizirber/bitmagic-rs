@@ -76,7 +76,7 @@ impl BVector {
         let mut buf = vec![];
         rdr.read_to_end(&mut buf)?;
 
-        let bnew = BVector::new();
+        let bnew = BVector::with_capacity(1);
 
         unsafe {
             res = bitmagic_sys::BM_bvector_deserialize(
