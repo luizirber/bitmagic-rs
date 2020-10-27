@@ -345,8 +345,7 @@ impl BVector {
     /// Returns `true` if `self` has no elements in common with `other`. This
     /// is equivalent to checking for an empty intersection.
     pub fn is_disjoint(&self, other: &BVector) -> bool {
-        // TODO: check if bitmagic has something equivalent
-        self.intersection(other).count() == 0
+        self.intersection_count(other) == 0
     }
 
     /// Returns `true` if the set is a subset of another, i.e. `other` contains

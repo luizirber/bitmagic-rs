@@ -89,6 +89,66 @@ impl BVector {
 
         Ok(bnew)
     }
+
+    /// Size of the intersection of two `BVector`s.
+    ///
+    /// Equivalent to the population count of AND of two bit vectors
+    pub fn intersection_count(&self, other: &BVector) -> usize {
+        let mut res = 0;
+        let mut pcount = 0;
+
+        unsafe {
+            res = bitmagic_sys::BM_bvector_count_AND(self.handle, other.handle, &mut pcount);
+            // TODO: check res
+        }
+
+        pcount as usize
+    }
+
+    /// Size of the union of two `BVector`s.
+    ///
+    /// Equivalent to the population count of OR of two bit vectors
+    pub fn union_count(&self, other: &BVector) -> usize {
+        let mut res = 0;
+        let mut pcount = 0;
+
+        unsafe {
+            res = bitmagic_sys::BM_bvector_count_OR(self.handle, other.handle, &mut pcount);
+            // TODO: check res
+        }
+
+        pcount as usize
+    }
+
+    /// Size of the difference of two `BVector`s.
+    ///
+    /// Equivalent to the population count of SUB of two bit vectors
+    pub fn difference_count(&self, other: &BVector) -> usize {
+        let mut res = 0;
+        let mut pcount = 0;
+
+        unsafe {
+            res = bitmagic_sys::BM_bvector_count_SUB(self.handle, other.handle, &mut pcount);
+            // TODO: check res
+        }
+
+        pcount as usize
+    }
+
+    /// Size of the symmetric difference of two `BVector`s.
+    ///
+    /// Equivalent to the population count of XOR of two bit vectors
+    pub fn symmetric_difference_count(&self, other: &BVector) -> usize {
+        let mut res = 0;
+        let mut pcount = 0;
+
+        unsafe {
+            res = bitmagic_sys::BM_bvector_count_XOR(self.handle, other.handle, &mut pcount);
+            // TODO: check res
+        }
+
+        pcount as usize
+    }
 }
 
 #[cfg(test)]
