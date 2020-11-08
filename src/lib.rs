@@ -10,9 +10,10 @@ use std::sync::Once;
 
 mod fixedbitset_api;
 
-static START: Once = Once::new();
 /// Initialize libbm runtime before use
 fn init_lib() {
+    static START: Once = Once::new();
+
     START.call_once(|| {
         unsafe {
             // TODO: check result, panic on error?
