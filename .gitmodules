@@ -1,3 +1,4 @@
 [submodule "bitmagic-sys/BitMagic"]
 	path = bitmagic-sys/BitMagic
 	url = https://github.com/luizirber/BitMagic.git
+	branch = rust_build_fix
