@@ -1,19 +1,18 @@
 use std::env;
 use std::path::PathBuf;
 
-use cmake::Config;
-
 fn main() {
     // TODO: deal with
     //   - optimization settings
     //   - wasm
 
-    let dst = Config::new("BitMagic/lang-maps/")
+    let dst = cmake::Config::new("BitMagic/lang-maps/")
         .build_target("bm-static")
         .define("BM_NO_STL", "1")
+        //.define("CMAKE_EXPORT_COMPILE_COMMANDS", "1")
+        //.env("CMAKE_EXPORT_COMPILE_COMMANDS", "1")
         .very_verbose(true)
         .build();
-
     println!("cargo:rustc-link-search=native={}/build", dst.display());
     println!("cargo:rustc-link-lib=static=bm-static");
 
