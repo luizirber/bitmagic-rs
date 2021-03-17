@@ -13,7 +13,10 @@ fn main() {
         //.env("CMAKE_EXPORT_COMPILE_COMMANDS", "1")
         .very_verbose(true)
         .build();
-    println!("cargo:rustc-link-search=native={}/build", dst.display());
+    let mut path_dst = PathBuf::new();
+    path_dst.push(dst);
+    path_dst.push("build");
+    println!("cargo:rustc-link-search=native={}", path_dst.display());
     println!("cargo:rustc-link-lib=static=bm-static");
 
     let bindings = bindgen::Builder::default()
