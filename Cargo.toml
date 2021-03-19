@@ -10,7 +10,7 @@ readme = "README.md"
 repository = "https://github.com/luizirber/bitmagic-rs"
 
 [dependencies]
-bitmagic-sys = { version = "0.1.0", path = "bitmagic-sys" }
+bitmagic-sys = { version = "0.1.1", path = "bitmagic-sys" }
 
 [features]
 bindgen = ["bitmagic-sys/bindgen"]
