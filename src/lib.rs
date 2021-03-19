@@ -52,7 +52,7 @@ impl BVector {
             res = bitmagic_sys::BM_bvector_serialize(
                 self.handle,
                 buf.as_mut_ptr() as *mut i8,
-                buf.len() as u64,
+                buf.len(),
                 &mut blob_size,
             );
         }
@@ -82,7 +82,7 @@ impl BVector {
             res = bitmagic_sys::BM_bvector_deserialize(
                 bnew.handle,
                 buf.as_mut_ptr() as *mut i8,
-                buf.len() as u64,
+                buf.len(),
             );
         }
         _check_res(res);

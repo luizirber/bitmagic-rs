@@ -57,6 +57,7 @@ fn generate_bindings() {
     let bindings = bindgen::Builder::default()
         .clang_arg("-I./BitMagic/lang-maps/libbm")
         .header("BitMagic/lang-maps/libbm/include/libbm.h")
+        .size_t_is_usize(true)
         .generate()
         .expect("Unable to generate bindings");
 

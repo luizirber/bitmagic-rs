@@ -32,7 +32,6 @@ pub const BM_SIMD_SSE42: u32 = 2;
 pub const BM_SIMD_AVX2: u32 = 5;
 pub const BM_TRUE: u32 = 1;
 pub const BM_FALSE: u32 = 0;
-pub type size_t = ::std::os::raw::c_ulong;
 pub type wchar_t = ::std::os::raw::c_int;
 #[repr(C)]
 #[repr(align(16))]
@@ -82,10 +81,10 @@ fn bindgen_test_layout_max_align_t() {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct BM_bvector_statistics {
-    pub bit_blocks: size_t,
-    pub gap_blocks: size_t,
-    pub max_serialize_mem: size_t,
-    pub memory_used: size_t,
+    pub bit_blocks: usize,
+    pub gap_blocks: usize,
+    pub max_serialize_mem: usize,
+    pub memory_used: usize,
 }
 #[test]
 fn bindgen_test_layout_BM_bvector_statistics() {
@@ -520,15 +519,15 @@ extern "C" {
     pub fn BM_bvector_serialize(
         h: *mut ::std::os::raw::c_void,
         buf: *mut ::std::os::raw::c_char,
-        buf_size: size_t,
-        pblob_size: *mut size_t,
+        buf_size: usize,
+        pblob_size: *mut usize,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_deserialize(
         h: *mut ::std::os::raw::c_void,
         buf: *const ::std::os::raw::c_char,
-        buf_size: size_t,
+        buf_size: usize,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
