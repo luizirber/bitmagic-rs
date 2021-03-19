@@ -28,7 +28,7 @@ fn main() {
 
     // Recreate the file and dump the processed contents to it
     let mut dst = File::create(&cmake_config).unwrap();
-    dst.write(new_data.as_bytes()).unwrap();
+    dst.write_all(new_data.as_bytes()).unwrap();
     // -- end of patching
 
     let mut config = cmake::Config::new("BitMagic/lang-maps/");
@@ -49,6 +49,11 @@ fn main() {
     println!("cargo:rustc-link-search=native={}", path_dst.display());
     println!("cargo:rustc-link-lib=static=bm-static");
 
+    generate_bindings();
+}
+
+#[cfg(feature = "bindgen")]
+fn generate_bindings() {
     let bindings = bindgen::Builder::default()
         .clang_arg("-I./BitMagic/lang-maps/libbm")
         .header("BitMagic/lang-maps/libbm/include/libbm.h")
@@ -60,3 +65,6 @@ fn main() {
         .write_to_file(out_path.join("bindings.rs"))
         .expect("couldn't write bindings!");
 }
+
+#[cfg(not(feature = "bindgen"))]
+fn generate_bindings() {}

@@ -1,13 +1,17 @@
 [package]
 name = "bitmagic-sys"
-version = "0.1.0"
+version = "0.1.0+bitmagic.7.3.1"
 authors = ["Luiz Irber <luiz.irber@gmail.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+build = "build.rs"
+description = "Low-level bindings for the bitmagic."
+license = "Apache-2.0"
+#links = "bm"
+readme = "README.md"
+repository = "https://github.com/luizirber/bitmagic-rs"
 
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.55.0"
+bindgen = { version = "0.55.0", optional = true }
 cmake = "0.1.45"

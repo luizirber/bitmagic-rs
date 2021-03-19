@@ -3,7 +3,13 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 #![allow(improper_ctypes)]
+#![allow(clippy::redundant_static_lifetimes)]
+
+#[cfg(feature = "bindgen")]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
+#[cfg(not(feature = "bindgen"))]
+include!("bindings.rs");
 
 #[cfg(test)]
 mod tests {
