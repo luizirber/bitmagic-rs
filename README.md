@@ -2,9 +2,10 @@
 
 Experimental Rust bindings for [BitMagic](http://www.bitmagic.io).
 
-`bitmagic-sys` is the low level unsafe bindings exposing the BitMagic C API,
-and the `bitmagic` crate exposes a safe Rust API.
+[bitmagic-sys] is the low level unsafe bindings exposing the BitMagic C API,
+while the top-level [bitmagic] crate exposes a safe Rust API.
+
+[bitmagic-sys]: ./bitmagic-sys/
 
 This is a work in progress, and focused on exposing an API similar to
 [fixedbitset 0.3.1](https://docs.rs/fixedbitset/0.3.1) before going for other methods in BitMagic.
-It is also using a fork of BitMagic for a [small fix to the build process](https://github.com/tlk00/BitMagic/compare/master...luizirber:rust_build_fix).
