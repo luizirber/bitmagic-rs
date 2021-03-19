@@ -44,18 +44,18 @@ pub struct max_align_t {
 #[test]
 fn bindgen_test_layout_max_align_t() {
     assert_eq!(
-        ::std::mem::size_of::<max_align_t>(),
+        ::core::mem::size_of::<max_align_t>(),
         32usize,
         concat!("Size of: ", stringify!(max_align_t))
     );
     assert_eq!(
-        ::std::mem::align_of::<max_align_t>(),
+        ::core::mem::align_of::<max_align_t>(),
         16usize,
         concat!("Alignment of ", stringify!(max_align_t))
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<max_align_t>())).__clang_max_align_nonce1 as *const _ as usize
+            &(*(::core::ptr::null::<max_align_t>())).__clang_max_align_nonce1 as *const _ as usize
         },
         0usize,
         concat!(
@@ -67,7 +67,7 @@ fn bindgen_test_layout_max_align_t() {
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<max_align_t>())).__clang_max_align_nonce2 as *const _ as usize
+            &(*(::core::ptr::null::<max_align_t>())).__clang_max_align_nonce2 as *const _ as usize
         },
         16usize,
         concat!(
@@ -89,18 +89,18 @@ pub struct BM_bvector_statistics {
 #[test]
 fn bindgen_test_layout_BM_bvector_statistics() {
     assert_eq!(
-        ::std::mem::size_of::<BM_bvector_statistics>(),
+        ::core::mem::size_of::<BM_bvector_statistics>(),
         32usize,
         concat!("Size of: ", stringify!(BM_bvector_statistics))
     );
     assert_eq!(
-        ::std::mem::align_of::<BM_bvector_statistics>(),
+        ::core::mem::align_of::<BM_bvector_statistics>(),
         8usize,
         concat!("Alignment of ", stringify!(BM_bvector_statistics))
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<BM_bvector_statistics>())).bit_blocks as *const _ as usize
+            &(*(::core::ptr::null::<BM_bvector_statistics>())).bit_blocks as *const _ as usize
         },
         0usize,
         concat!(
@@ -112,7 +112,7 @@ fn bindgen_test_layout_BM_bvector_statistics() {
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<BM_bvector_statistics>())).gap_blocks as *const _ as usize
+            &(*(::core::ptr::null::<BM_bvector_statistics>())).gap_blocks as *const _ as usize
         },
         8usize,
         concat!(
@@ -124,7 +124,8 @@ fn bindgen_test_layout_BM_bvector_statistics() {
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<BM_bvector_statistics>())).max_serialize_mem as *const _ as usize
+            &(*(::core::ptr::null::<BM_bvector_statistics>())).max_serialize_mem as *const _
+                as usize
         },
         16usize,
         concat!(
@@ -136,7 +137,7 @@ fn bindgen_test_layout_BM_bvector_statistics() {
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<BM_bvector_statistics>())).memory_used as *const _ as usize
+            &(*(::core::ptr::null::<BM_bvector_statistics>())).memory_used as *const _ as usize
         },
         24usize,
         concat!(
@@ -148,7 +149,7 @@ fn bindgen_test_layout_BM_bvector_statistics() {
     );
 }
 extern "C" {
-    pub fn BM_init(arg1: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+    pub fn BM_init(arg1: *mut ::core::ffi::c_void) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = "return copyright info string and version information."]
@@ -169,63 +170,63 @@ extern "C" {
 }
 extern "C" {
     pub fn BM_bvector_construct(
-        h: *mut *mut ::std::os::raw::c_void,
+        h: *mut *mut ::core::ffi::c_void,
         bv_max: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn BM_bvector_init(h: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+    pub fn BM_bvector_init(h: *mut ::core::ffi::c_void) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_construct_copy(
-        h: *mut *mut ::std::os::raw::c_void,
-        hfrom: *mut ::std::os::raw::c_void,
+        h: *mut *mut ::core::ffi::c_void,
+        hfrom: *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn BM_bvector_free(h: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+    pub fn BM_bvector_free(h: *mut ::core::ffi::c_void) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_get_size(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         psize: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_set_size(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         new_size: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_swap(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_set_bit(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
         val: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_set_bits(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         idx: *mut ::std::os::raw::c_uint,
         idx_size: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_set_bit_no_check(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_set_bit_conditional(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
         val: ::std::os::raw::c_int,
         condition: ::std::os::raw::c_int,
@@ -234,60 +235,60 @@ extern "C" {
 }
 extern "C" {
     pub fn BM_bvector_flip_bit(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_inc_bit(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
         carry_over: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn BM_bvector_set(h: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+    pub fn BM_bvector_set(h: *mut ::core::ffi::c_void) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_set_range(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         left: ::std::os::raw::c_uint,
         right: ::std::os::raw::c_uint,
         value: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn BM_bvector_invert(h: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+    pub fn BM_bvector_invert(h: *mut ::core::ffi::c_void) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_clear(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         free_mem: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_extract_next(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
         pnext: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_get_bit(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
         pval: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_count(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         pcount: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_count_range(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         left: ::std::os::raw::c_uint,
         right: ::std::os::raw::c_uint,
         pcount: *mut ::std::os::raw::c_uint,
@@ -295,13 +296,13 @@ extern "C" {
 }
 extern "C" {
     pub fn BM_bvector_any(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         pval: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_find(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         from: ::std::os::raw::c_uint,
         ppos: *mut ::std::os::raw::c_uint,
         pfound: *mut ::std::os::raw::c_int,
@@ -309,14 +310,14 @@ extern "C" {
 }
 extern "C" {
     pub fn BM_bvector_find_reverse(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         ppos: *mut ::std::os::raw::c_uint,
         pfound: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_find_rank(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         rank: ::std::os::raw::c_uint,
         from: ::std::os::raw::c_uint,
         pidx: *mut ::std::os::raw::c_uint,
@@ -325,191 +326,191 @@ extern "C" {
 }
 extern "C" {
     pub fn BM_bvector_get_first(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         pi: *mut ::std::os::raw::c_uint,
         pfound: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_get_next(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         i: ::std::os::raw::c_uint,
         pnext: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_compare(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pres: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_find_first_mismatch(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pi: *mut ::std::os::raw::c_uint,
         pfound: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_optimize(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         opt_mode: ::std::os::raw::c_int,
         pstat: *mut BM_bvector_statistics,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_calc_stat(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         pstat: *mut BM_bvector_statistics,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_operation(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc: *mut ::core::ffi::c_void,
         opcode: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_AND(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc: *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_AND_2sc(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc1: *mut ::std::os::raw::c_void,
-        hsrc2: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc1: *mut ::core::ffi::c_void,
+        hsrc2: *mut ::core::ffi::c_void,
         compress: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_OR(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc: *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_OR_2sc(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc1: *mut ::std::os::raw::c_void,
-        hsrc2: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc1: *mut ::core::ffi::c_void,
+        hsrc2: *mut ::core::ffi::c_void,
         compress: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_SUB(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc: *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_SUB_2sc(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc1: *mut ::std::os::raw::c_void,
-        hsrc2: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc1: *mut ::core::ffi::c_void,
+        hsrc2: *mut ::core::ffi::c_void,
         compress: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_XOR(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc: *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_XOR_2sc(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc1: *mut ::std::os::raw::c_void,
-        hsrc2: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc1: *mut ::core::ffi::c_void,
+        hsrc2: *mut ::core::ffi::c_void,
         compress: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_merge(
-        hdst: *mut ::std::os::raw::c_void,
-        hsrc: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
+        hsrc: *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn BM_bvector_rshift1(hdst: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+    pub fn BM_bvector_rshift1(hdst: *mut ::core::ffi::c_void) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_OR_arr(
-        hdst: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
         arr_begin: *const ::std::os::raw::c_uint,
         arr_end: *const ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_XOR_arr(
-        hdst: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
         arr_begin: *const ::std::os::raw::c_uint,
         arr_end: *const ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_SUB_arr(
-        hdst: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
         arr_begin: *const ::std::os::raw::c_uint,
         arr_end: *const ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_AND_arr(
-        hdst: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
         arr_begin: *const ::std::os::raw::c_uint,
         arr_end: *const ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_combine_AND_arr_sorted(
-        hdst: *mut ::std::os::raw::c_void,
+        hdst: *mut ::core::ffi::c_void,
         arr_begin: *const ::std::os::raw::c_uint,
         arr_end: *const ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_enumerator_construct(
-        h: *mut ::std::os::raw::c_void,
-        peh: *mut *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
+        peh: *mut *mut ::core::ffi::c_void,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_enumerator_construct_from(
-        h: *mut ::std::os::raw::c_void,
-        peh: *mut *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
+        peh: *mut *mut ::core::ffi::c_void,
         pos: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn BM_bvector_enumerator_free(eh: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+    pub fn BM_bvector_enumerator_free(eh: *mut ::core::ffi::c_void) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_enumerator_is_valid(
-        eh: *mut ::std::os::raw::c_void,
+        eh: *mut ::core::ffi::c_void,
         pvalid: *mut ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_enumerator_get_value(
-        eh: *mut ::std::os::raw::c_void,
+        eh: *mut ::core::ffi::c_void,
         pvalue: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_enumerator_next(
-        eh: *mut ::std::os::raw::c_void,
+        eh: *mut ::core::ffi::c_void,
         pvalid: *mut ::std::os::raw::c_int,
         pvalue: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_enumerator_goto(
-        eh: *mut ::std::os::raw::c_void,
+        eh: *mut ::core::ffi::c_void,
         pos: ::std::os::raw::c_uint,
         pvalid: *mut ::std::os::raw::c_int,
         pvalue: *mut ::std::os::raw::c_uint,
@@ -517,7 +518,7 @@ extern "C" {
 }
 extern "C" {
     pub fn BM_bvector_serialize(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         buf: *mut ::std::os::raw::c_char,
         buf_size: usize,
         pblob_size: *mut usize,
@@ -525,64 +526,64 @@ extern "C" {
 }
 extern "C" {
     pub fn BM_bvector_deserialize(
-        h: *mut ::std::os::raw::c_void,
+        h: *mut ::core::ffi::c_void,
         buf: *const ::std::os::raw::c_char,
         buf_size: usize,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_count_AND(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pcount: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_any_AND(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pany: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_count_XOR(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pcount: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_any_XOR(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pany: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_count_SUB(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pcount: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_any_SUB(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pany: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_count_OR(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pcount: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn BM_bvector_any_OR(
-        h1: *mut ::std::os::raw::c_void,
-        h2: *mut ::std::os::raw::c_void,
+        h1: *mut ::core::ffi::c_void,
+        h2: *mut ::core::ffi::c_void,
         pany: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
