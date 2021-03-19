@@ -59,7 +59,7 @@ impl BVector {
         _check_res(res);
 
         if blob_size == 0 || blob_size > bv_stat.max_serialize_mem {
-            todo!("throw error")
+            unimplemented!("throw error")
         }
 
         wtr.write_all(buf.as_slice())?;
