@@ -16,9 +16,8 @@ fn init_lib() {
 
     START.call_once(|| {
         unsafe {
-            // TODO: check result, panic on error?
             let res = bitmagic_sys::BM_init(ptr::null_mut());
-            // TODO: can be BM_OK or BM_ERR_CPU
+            _check_res(res);
         };
     });
 }
@@ -34,7 +33,6 @@ impl BVector {
     where
         W: Write,
     {
-        let mut res = 0;
         let mut bv_stat = bitmagic_sys::BM_bvector_statistics {
             bit_blocks: 0,
             gap_blocks: 0,
@@ -42,10 +40,11 @@ impl BVector {
             memory_used: 0,
         };
 
+        let mut res;
         unsafe {
             res = bitmagic_sys::BM_bvector_optimize(self.handle, 3, &mut bv_stat);
-            // TODO: check res
         }
+        _check_res(res);
 
         let mut buf = vec![0u8; bv_stat.max_serialize_mem as usize];
         let mut blob_size = 0;
@@ -56,8 +55,8 @@ impl BVector {
                 buf.len() as u64,
                 &mut blob_size,
             );
-            // TODO: check res
         }
+        _check_res(res);
 
         if blob_size == 0 || blob_size > bv_stat.max_serialize_mem {
             todo!("throw error")
@@ -73,20 +72,20 @@ impl BVector {
     where
         R: Read,
     {
-        let mut res = 0;
         let mut buf = vec![];
         rdr.read_to_end(&mut buf)?;
 
         let bnew = BVector::with_capacity(1);
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_deserialize(
                 bnew.handle,
                 buf.as_mut_ptr() as *mut i8,
                 buf.len() as u64,
             );
-            // TODO: check res
         }
+        _check_res(res);
 
         Ok(bnew)
     }
@@ -95,13 +94,14 @@ impl BVector {
     ///
     /// Equivalent to the population count of AND of two bit vectors
     pub fn intersection_count(&self, other: &BVector) -> usize {
-        let mut res = 0;
         let mut pcount = 0;
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_count_AND(self.handle, other.handle, &mut pcount);
             // TODO: check res
         }
+        _check_res(res);
 
         pcount as usize
     }
@@ -110,13 +110,13 @@ impl BVector {
     ///
     /// Equivalent to the population count of OR of two bit vectors
     pub fn union_count(&self, other: &BVector) -> usize {
-        let mut res = 0;
         let mut pcount = 0;
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_count_OR(self.handle, other.handle, &mut pcount);
-            // TODO: check res
         }
+        _check_res(res);
 
         pcount as usize
     }
@@ -125,13 +125,13 @@ impl BVector {
     ///
     /// Equivalent to the population count of SUB of two bit vectors
     pub fn difference_count(&self, other: &BVector) -> usize {
-        let mut res = 0;
         let mut pcount = 0;
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_count_SUB(self.handle, other.handle, &mut pcount);
-            // TODO: check res
         }
+        _check_res(res);
 
         pcount as usize
     }
@@ -140,16 +140,23 @@ impl BVector {
     ///
     /// Equivalent to the population count of XOR of two bit vectors
     pub fn symmetric_difference_count(&self, other: &BVector) -> usize {
-        let mut res = 0;
         let mut pcount = 0;
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_count_XOR(self.handle, other.handle, &mut pcount);
             // TODO: check res
         }
+        _check_res(res);
 
         pcount as usize
     }
+}
+
+pub(crate) fn _check_res(_res: i32) {
+    // TODO: look into res values in the bitmagic API
+    // TODO: check result, panic on error?
+    // TODO: can be BM_OK or BM_ERR_CPU
 }
 
 #[cfg(test)]

@@ -5,14 +5,14 @@ use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign, I
 use std::ops::{Range, RangeFrom, RangeFull, RangeTo};
 use std::ptr;
 
-use crate::{init_lib, BVector};
+use crate::{init_lib, BVector, _check_res};
 
 impl BVector {
     /// Create a new bit-vector container with runtime compression of bits
     pub fn new() -> BVector {
         init_lib();
         let mut handle = ptr::null_mut();
-        let mut res = 0;
+        let res;
         // TODO: BM_bvector_construct can fail from memory allocations,
         // or from passing a null ptr as handle.
         // If we follow stdlib semantics, a memory allocation error
@@ -23,6 +23,7 @@ impl BVector {
             // TODO: potentially call BM_bvector_init too,
             // so we can call the _no_check() functions?
         };
+        _check_res(res);
         BVector { handle }
     }
 
@@ -36,7 +37,7 @@ impl BVector {
     pub fn with_capacity(capacity: usize) -> BVector {
         init_lib();
         let mut handle = ptr::null_mut();
-        let mut res = 0;
+        let res;
         // TODO: BM_bvector_construct can fail from memory allocations,
         // or from passing a null ptr as handle.
         // If we follow stdlib semantics, a memory allocation error
@@ -47,28 +48,31 @@ impl BVector {
             // TODO: potentially call BM_bvector_init too,
             // so we can call the _no_check() functions?
         };
+        _check_res(res);
         BVector { handle }
     }
 
     /// Grow capacity to bits, all new bits initialized to zero
     pub fn grow(&mut self, bits: usize) {
-        let mut res = 0;
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_set_size(self.handle, bits as u32);
             // TODO: check res
         };
+        _check_res(res);
     }
 
     /// Return the length of the BVector in bits.
     pub fn len(&self) -> usize {
         let mut size = 0;
-        let mut res = 0;
+        let res;
         // TODO: size returns the full size (4 GB?), but fixedbitset
         // has a fixed size and is based on the capacity.
         unsafe {
             res = bitmagic_sys::BM_bvector_get_size(self.handle, &mut size);
             // TODO: check res
         };
+        _check_res(res);
         // TODO: size set to maximum, return 0 for now
         if size == 4294967295 {
             0
@@ -91,21 +95,22 @@ impl BVector {
     /// Note: Also available with index syntax: `bvector[bit]`.
     pub fn contains(&self, bit: usize) -> bool {
         let mut pval = 0;
-        let mut res = 0;
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_get_bit(self.handle, bit as u32, &mut pval);
-            // TODO: check res
         };
+        _check_res(res);
         pval == 1
     }
 
     /// Clear all bits.
     pub fn clear(&mut self) {
-        let mut res = 0;
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_clear(self.handle, 0);
-            // TODO: check res, check if 0 is actually NOT free mem
         };
+        // TODO: check res, check if 0 is actually NOT free mem
+        _check_res(res);
     }
 
     /// Enable `bit`.
@@ -113,23 +118,25 @@ impl BVector {
     /// **Panics** if **bit** is out of bounds.
     #[inline]
     pub fn insert(&mut self, bit: usize) {
-        let mut res = 0;
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_set_bit_no_check(self.handle, bit as u32);
-            // TODO: check res
         };
+        _check_res(res);
     }
 
     /// Enable `bit`, and return its previous value.
     ///
     /// **Panics** if **bit** is out of bounds.
     pub fn put(&mut self, bit: usize) -> bool {
-        let mut res = 0;
         let mut pval = 0;
+
+        let mut res;
         unsafe {
             res = bitmagic_sys::BM_bvector_get_bit(self.handle, bit as u32, &mut pval);
+            _check_res(res);
             res = bitmagic_sys::BM_bvector_set_bit_no_check(self.handle, bit as u32);
-            // TODO: check res
+            _check_res(res);
         };
         pval == 1
     }
@@ -138,22 +145,22 @@ impl BVector {
     ///
     /// ***Panics*** if **bit** is out of bounds
     pub fn toggle(&mut self, bit: usize) {
-        let mut res = 0;
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_flip_bit(self.handle, bit as u32);
-            // TODO: check res
         };
+        _check_res(res);
     }
 
     /// **Panics** if **bit** is out of bounds.
     pub fn set(&mut self, bit: usize, enabled: bool) {
-        let mut res = 0;
         let val = if enabled { 1 } else { 0 };
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_set_bit(self.handle, bit as u32, val);
-            // TODO: check res
         };
+        _check_res(res);
     }
 
     /// Copies boolean value from specified bit to the specified bit.
@@ -198,14 +205,14 @@ impl BVector {
     /// **Panics** if the range extends past the end of the bitset.
     #[inline]
     pub fn count_ones<T: IndexRange>(&self, range: T) -> usize {
-        let mut res = 0;
+        let res;
         let mut pcount = 0;
         let (start, end) = self.parse_range(range);
 
         unsafe {
             res = bitmagic_sys::BM_bvector_count_range(self.handle, start, end, &mut pcount);
-            // TODO: check res
         }
+        _check_res(res);
         pcount as usize
     }
 
@@ -215,15 +222,14 @@ impl BVector {
     ///
     /// **Panics** if the range extends past the end of the bitset.
     pub fn set_range<T: IndexRange>(&mut self, range: T, enabled: bool) {
-        let mut res = 0;
-        let mut pcount = 0;
         let (start, end) = self.parse_range(range);
         let val = if enabled { 1 } else { 0 };
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_set_range(self.handle, start, end, val);
-            // TODO: check res
         }
+        _check_res(res);
     }
 
     /// Enables every bit in the given range.
@@ -293,28 +299,27 @@ impl BVector {
     ///
     /// On calling this method, `self`'s capacity may be increased to match `other`'s.
     pub fn union_with(&mut self, other: &BVector) {
-        let mut res = 0;
-
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_combine_OR(self.handle, other.handle);
-            // TODO: check res
         }
+        _check_res(res);
     }
 
     /// In-place intersection of two `BVector`s.
     ///
     /// On calling this method, `self`'s capacity will remain the same as before.
     pub fn intersect_with(&mut self, other: &BVector) {
-        let mut res = 0;
-        let len = self.len();
+        //let len = self.len();
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_combine_AND(self.handle, other.handle);
-            // TODO: check res
+            _check_res(res);
 
             // TODO: fixedbitset truncates to size of self, while bitmagic doesn't
             //res = bitmagic_sys::BM_bvector_set_size(self.handle, len as u32);
-            // TODO: check res
+            //_check_res(res);
         }
     }
 
@@ -322,24 +327,23 @@ impl BVector {
     ///
     /// On calling this method, `self`'s capacity will remain the same as before.
     pub fn difference_with(&mut self, other: &BVector) {
-        let mut res = 0;
-
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_combine_SUB(self.handle, other.handle);
-            // TODO: check res
         }
+        _check_res(res);
     }
 
     /// In-place symmetric difference of two `BVector`s.
     ///
     /// On calling this method, `self`'s capacity may be increased to match `other`'s.
     pub fn symmetric_difference_with(&mut self, other: &BVector) {
-        let mut res = 0;
-
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_combine_XOR(self.handle, other.handle);
             // TODO: check res
         }
+        _check_res(res);
     }
 
     /// Returns `true` if `self` has no elements in common with `other`. This
@@ -403,13 +407,14 @@ impl Drop for BVector {
 
 impl PartialOrd for BVector {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        let mut res = 0;
         let mut pres = 0;
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_compare(self.handle, other.handle, &mut pres);
-            // TODO: check res
         }
+        _check_res(res);
+
         match pres {
             0 => Some(Ordering::Equal),
             -1 => Some(Ordering::Less),
@@ -421,13 +426,15 @@ impl PartialOrd for BVector {
 
 impl PartialEq for BVector {
     fn eq(&self, other: &Self) -> bool {
-        let mut res = 0;
         let mut pres = 0;
 
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_compare(self.handle, other.handle, &mut pres);
             // TODO: check res
         }
+        _check_res(res);
+
         pres == 0
     }
 }
@@ -528,8 +535,8 @@ impl<'a> Iterator for Ones<'a> {
     #[inline]
     fn next(&mut self) -> Option<Self::Item> {
         let mut pnext = 0;
-        let mut res = 0;
 
+        let mut res;
         if self.current_bit_idx.is_none() {
             self.current_bit_idx = Some(0);
 
@@ -537,6 +544,7 @@ impl<'a> Iterator for Ones<'a> {
             unsafe {
                 res = bitmagic_sys::BM_bvector_get_bit(self.bv.handle, 0, &mut pnext);
             }
+            _check_res(res);
             if pnext == 1 {
                 return Some(0);
             }
@@ -549,6 +557,7 @@ impl<'a> Iterator for Ones<'a> {
                 &mut pnext,
             );
         }
+        _check_res(res);
 
         if pnext > self.current_bit_idx.unwrap() {
             self.current_bit_idx = Some(pnext);
@@ -563,14 +572,16 @@ impl Clone for BVector {
     #[inline]
     fn clone(&self) -> Self {
         let mut handle = ptr::null_mut();
-        let mut res = 0;
+
         // TODO: BM_bvector_construct_copy can fail from memory allocations,
         // or from passing a null ptr as handle.
         // If we follow stdlib semantics, a memory allocation error
         // show be a panic, and would also avoid changing the method signature
         // to return a Result.
+        let res;
         unsafe {
             res = bitmagic_sys::BM_bvector_construct_copy(&mut handle, self.handle);
+            _check_res(res);
             // TODO: potentially call BM_bvector_init too,
             // so we can call the _no_check() functions?
         };
@@ -635,12 +646,12 @@ impl<'a> BitAnd for &'a BVector {
         let mut new_bvector = (*short).clone();
         new_bvector.intersect_with(long);
 
+        let res;
         unsafe {
-            let mut res = 0;
             // TODO: fixedbitset truncates to size of self, while bitmagic doesn't
             res = bitmagic_sys::BM_bvector_set_size(new_bvector.handle, short.len() as u32);
-            // TODO: check res
         }
+        _check_res(res);
         new_bvector
     }
 }
