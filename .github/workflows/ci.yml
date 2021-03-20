@@ -109,7 +109,7 @@ jobs:
         with:
           use-cross: true
           command: test
-          args: --no-fail-fast -- --test-threads 1
+          args: --target ${{ matrix.target }} --no-fail-fast -- --test-threads 1
 
   coverage:
     runs-on: ubuntu-latest
