@@ -6,7 +6,7 @@ edition = "2018"
 build = "build.rs"
 description = "Low-level bindings for the bitmagic."
 license = "Apache-2.0"
-#links = "bm"
+links = "bm"
 readme = "README.md"
 repository = "https://github.com/luizirber/bitmagic-rs"
 
@@ -14,4 +14,4 @@ repository = "https://github.com/luizirber/bitmagic-rs"
 
 [build-dependencies]
 bindgen = { version = "0.55.0", optional = true }
-cmake = "0.1.45"
+cc = "1.0.67"
