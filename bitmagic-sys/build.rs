@@ -13,6 +13,7 @@ fn main() {
     config
         .cpp(true) // Switch to C++ library compilation.
         .include("BitMagic/lang-maps/libbm/include")
+        .include("BitMagic/lang-maps/libbm/src")
         .include("BitMagic/src")
         .flag_if_supported("-std=c++14")
         .file("BitMagic/lang-maps/libbm/src/libbm.cpp")
