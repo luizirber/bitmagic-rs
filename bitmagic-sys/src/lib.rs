@@ -4,6 +4,7 @@
 #![allow(dead_code)]
 #![allow(improper_ctypes)]
 #![allow(clippy::redundant_static_lifetimes)]
+#![allow(clippy::upper_case_acronyms)]
 
 #[cfg(feature = "bindgen")]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
