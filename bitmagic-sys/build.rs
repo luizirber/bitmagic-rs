@@ -14,6 +14,7 @@ fn main() {
         .cpp(true) // Switch to C++ library compilation.
         .include("BitMagic/lang-maps/libbm/include")
         .include("BitMagic/src")
+        .flag_if_supported("-std=c++14")
         .file("BitMagic/lang-maps/libbm/src/libbm.cpp")
         //.define("BM64ADDR", "1")
         .define("BM_NO_STL", "1");
