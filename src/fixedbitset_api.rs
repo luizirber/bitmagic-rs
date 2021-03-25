@@ -94,6 +94,10 @@ impl BVector {
     ///
     /// Note: Also available with index syntax: `bvector[bit]`.
     pub fn contains(&self, bit: usize) -> bool {
+        if bit >= self.len() {
+            return false;
+        }
+
         let mut pval = 0;
         let res;
         unsafe {

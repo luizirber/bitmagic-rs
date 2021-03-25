@@ -15,6 +15,7 @@ fn main() {
         .include("BitMagic/lang-maps/libbm/include")
         .include("BitMagic/src")
         .file("BitMagic/lang-maps/libbm/src/libbm.cpp")
+        //.define("BM64ADDR", "1")
         .define("BM_NO_STL", "1");
 
     config.compile("bm");
@@ -34,7 +35,7 @@ fn generate_bindings() {
         .generate()
         .expect("Unable to generate bindings");
 
-    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
+    let out_path = std::path::PathBuf::from(std::env::var("OUT_DIR").unwrap());
     bindings
         .write_to_file(out_path.join("bindings.rs"))
         .expect("couldn't write bindings!");
