@@ -51,24 +51,25 @@ fn generate_bindings() {
 fn generate_bindings() {}
 
 fn parse_features(config: &mut cc::Build) {
-    let features = env::var("CARGO_CFG_TARGET_FEATURE").unwrap();
-    // TODO: read CARGO_BUILD_RUSTFLAGS too, so we can set
-    // the target cpu? For example, this can be added to
-    // ~/.cargo/config in order to use all features for the CPU
-    // in the machine where the code is being compiled:
-    // ```
-    // [target.x86_64-unknown-linux-gnu]
-    // rustflags = ["-C", "target-cpu=native"]
-    // ```
+    if let Ok(features) = env::var("CARGO_CFG_TARGET_FEATURE") {
+        // TODO: read CARGO_BUILD_RUSTFLAGS too, so we can set
+        // the target cpu? For example, this can be added to
+        // ~/.cargo/config in order to use all features for the CPU
+        // in the machine where the code is being compiled:
+        // ```
+        // [target.x86_64-unknown-linux-gnu]
+        // rustflags = ["-C", "target-cpu=native"]
+        // ```
 
-    if features.contains("avx2") {
-        config.define("BMAVX2OPT", "1");
-        config.flag_if_supported("-mavx2");
-        config.flag_if_supported("-march=skylake");
-    } else if features.contains("sse4.2") {
-        config.define("BMSSE42OPT", "1");
-        config.flag_if_supported("-msse4.2");
-        config.flag_if_supported("-march=nehalem");
+        if features.contains("avx2") {
+            config.define("BMAVX2OPT", "1");
+            config.flag_if_supported("-mavx2");
+            config.flag_if_supported("-march=skylake");
+        } else if features.contains("sse4.2") {
+            config.define("BMSSE42OPT", "1");
+            config.flag_if_supported("-msse4.2");
+            config.flag_if_supported("-march=nehalem");
+        }
     } else {
         config.define("BM_SIMD_NO", "1");
     }
