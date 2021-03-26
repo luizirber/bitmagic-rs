@@ -90,7 +90,6 @@ jobs:
       matrix:
         target: [
           aarch64-unknown-linux-gnu,
-          s390x-unknown-linux-gnu,
           powerpc64le-unknown-linux-gnu
         ]
     steps:
