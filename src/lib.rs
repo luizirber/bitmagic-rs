@@ -51,7 +51,7 @@ impl BVector {
         unsafe {
             res = bitmagic_sys::BM_bvector_serialize(
                 self.handle,
-                buf.as_mut_ptr() as *mut i8,
+                buf.as_mut_ptr() as *mut ::std::os::raw::c_char,
                 buf.len(),
                 &mut blob_size,
             );
@@ -81,7 +81,7 @@ impl BVector {
         unsafe {
             res = bitmagic_sys::BM_bvector_deserialize(
                 bnew.handle,
-                buf.as_mut_ptr() as *mut i8,
+                buf.as_ptr() as *const ::std::os::raw::c_char,
                 buf.len(),
             );
         }
