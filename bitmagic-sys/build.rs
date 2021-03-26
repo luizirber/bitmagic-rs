@@ -20,7 +20,6 @@ fn main() {
         .flag_if_supported("-std=c++14")
         .file("BitMagic/lang-maps/libbm/src/libbm.cpp")
         //.define("BM64ADDR", "1")
-        .define("BM_SIMD_NO", "1")
         .define("BM_NO_STL", "1");
 
     parse_features(&mut config);
@@ -70,5 +69,7 @@ fn parse_features(config: &mut cc::Build) {
         config.define("BMSSE42OPT", "1");
         config.flag_if_supported("-msse4.2");
         config.flag_if_supported("-march=nehalem");
+    } else {
+        config.define("BM_SIMD_NO", "1");
     }
 }
