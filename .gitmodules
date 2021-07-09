@@ -1,5 +1,4 @@
 [submodule "bitmagic-sys/BitMagic"]
 	path = bitmagic-sys/BitMagic
 	url = https://github.com/tlk00/BitMagic.git
-	commit = 3a60ef11f0324dd8dbef42321393fd69b7e22024
-	branch = master
+	commit = dd02920ad5e8a08a1c2f2bc949cff56de308df01
