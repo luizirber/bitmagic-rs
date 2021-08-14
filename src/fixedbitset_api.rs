@@ -263,7 +263,7 @@ impl BVector {
     pub fn ones(&self) -> Ones {
         Ones {
             current_bit_idx: None,
-            bv: &self,
+            bv: self,
         }
     }
 
@@ -462,7 +462,7 @@ impl<'a> Iterator for Difference<'a> {
 
     #[inline]
     fn next(&mut self) -> Option<Self::Item> {
-        while let Some(nxt) = self.iter.next() {
+        for nxt in &mut self.iter {
             if !self.other.contains(nxt) {
                 return Some(nxt);
             }
@@ -500,7 +500,7 @@ impl<'a> Iterator for Intersection<'a> {
 
     #[inline]
     fn next(&mut self) -> Option<Self::Item> {
-        while let Some(nxt) = self.iter.next() {
+        for nxt in &mut self.iter {
             if self.other.contains(nxt) {
                 return Some(nxt);
             }
