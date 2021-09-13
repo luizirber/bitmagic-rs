@@ -15,7 +15,7 @@ fn main() {
         .include("BitMagic/lang-maps/libbm/include")
         .include("BitMagic/lang-maps/libbm/src")
         .include("BitMagic/src")
-        .flag_if_supported("-std=c++14")
+        .flag_if_supported("-std=c++17")
         .file("BitMagic/lang-maps/libbm/src/libbm.cpp")
         //.define("BM64ADDR", "1")
         .define("BM_SIMD_NO", "1")
