@@ -1,6 +1,6 @@
 [package]
 name = "bitmagic"
-version = "0.2.1+bitmagic.7.4.0"
+version = "0.2.2+bitmagic.7.5.0"
 authors = ["Luiz Irber <luiz.irber@gmail.com>"]
 edition = "2018"
 

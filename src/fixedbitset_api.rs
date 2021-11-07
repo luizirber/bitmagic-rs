@@ -790,7 +790,7 @@ mod tests {
         let mut fb = BVector::with_capacity(N);
 
         for i in 0..(N + 10) {
-            assert_eq!(fb.contains(i), false);
+            assert!(!fb.contains(i));
         }
 
         fb.insert(10);
@@ -968,7 +968,7 @@ mod tests {
         for i in 0..97 {
             assert_eq!(
                 fb.contains(i),
-                i < 3 || 9 <= i && i < 32 || 37 <= i && i < 81 || 90 <= i
+                i < 3 || (9..32).contains(&i) || (37..81).contains(&i) || 90 <= i
             );
         }
         assert!(!fb.contains(97));
@@ -987,7 +987,7 @@ mod tests {
         fb.set_range(40..40, true);
 
         for i in 0..48 {
-            assert_eq!(fb.contains(i), 5 <= i && i < 9 || 32 <= i && i < 37);
+            assert_eq!(fb.contains(i), (5..9).contains(&i) || (32..37).contains(&i));
         }
         assert!(!fb.contains(48));
         assert!(!fb.contains(64));
@@ -1005,7 +1005,7 @@ mod tests {
         for i in 0..40 {
             assert_eq!(
                 fb.contains(i),
-                i < 5 || 10 <= i && i < 12 || 30 <= i && i < 34 || 38 <= i
+                i < 5 || (10..12).contains(&i) || (30..34).contains(&i) || 38 <= i
             );
         }
         assert!(!fb.contains(40));
@@ -1501,7 +1501,7 @@ mod tests {
         let expected = {
             let mut tmp = items.clone();
             tmp.extend(new);
-            tmp.sort();
+            tmp.sort_unstable();
             tmp.dedup();
             tmp
         };
@@ -1516,8 +1516,8 @@ mod tests {
         for i in items {
             assert!(fb.contains(i));
         }
-        for i in vec![1, 3, 5, 7] {
-            assert!(!fb.contains(i));
+        for i in &[1usize, 3, 5, 7] {
+            assert!(!fb.contains(*i));
         }
         assert_eq!(fb.len(), 9);
     }
