@@ -1,6 +1,6 @@
 [package]
 name = "bitmagic-sys"
-version = "0.2.3+bitmagic.7.6.0"
+version = "0.2.4+bitmagic.7.7.7"
 authors = ["Luiz Irber <luiz.irber@gmail.com>"]
 edition = "2018"
 build = "build.rs"
