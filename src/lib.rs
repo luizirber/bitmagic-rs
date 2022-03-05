@@ -27,6 +27,9 @@ pub struct BVector {
     handle: *mut c_void,
 }
 
+unsafe impl Sync for BVector {}
+unsafe impl Send for BVector {}
+
 impl BVector {
     /// Serialize bit vector
     pub fn serialize<W>(&self, mut wtr: W) -> Result<(), Box<dyn std::error::Error>>
@@ -183,5 +186,14 @@ mod tests {
         for i in 50..70 {
             assert!(new_bv.contains(i));
         }
+    }
+
+    #[test]
+    fn assert_parallel() {
+        fn is_sync<T: Sync>() {}
+        fn is_send<T: Send>() {}
+
+        is_sync::<BVector>();
+        is_send::<BVector>();
     }
 }
